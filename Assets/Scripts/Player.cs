@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     private bool _isRunning;
     private bool _isRolling;
     private bool _isCutting;
+    private bool _isDigging;
+
+    private int handleObj;
     
     
     public Vector2 direction {
@@ -36,6 +39,11 @@ public class Player : MonoBehaviour
         set { _isCutting = value; }
     }
 
+    public bool isDigging {
+        get { return _isDigging; }
+        set { _isDigging = value; }
+    }
+
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
@@ -45,10 +53,20 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+
+        if(Input.GetKeyDown(KeyCode.Alpha1)) {
+            handleObj = 1;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha2)) {
+            handleObj = 2;
+        }
+
         OnInput();
         OnRun();
         OnRolling();
         OnCutting();
+        OnDigging();
     }
 
     private void FixedUpdate() {
@@ -88,14 +106,30 @@ public class Player : MonoBehaviour
     }
 
     void OnCutting() {
-        if(Input.GetMouseButtonDown(0)) {
-            _isCutting = true;
-            speed = 0;
-        }
+        if(handleObj == 1) {
+            if(Input.GetMouseButtonDown(0)) {
+                _isCutting = true;
+                speed = 0;
+            }
 
-        if(Input.GetMouseButtonUp(0)) {
-             _isCutting = false;
-             speed = initialSpeed;
+            if(Input.GetMouseButtonUp(0)) {
+                _isCutting = false;
+                speed = initialSpeed;
+            }
+        }
+    }
+
+    void OnDigging() {
+        if(handleObj == 2) {
+            if(Input.GetMouseButtonDown(0)) {
+                _isDigging = true;
+                speed = 0;
+            }
+
+            if(Input.GetMouseButtonUp(0)) {
+                _isDigging = false;
+                speed = initialSpeed;
+            }
         }
     }
 
