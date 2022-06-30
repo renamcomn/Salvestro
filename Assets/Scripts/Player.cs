@@ -55,11 +55,11 @@ public class Player : MonoBehaviour
     {
 
         if(Input.GetKeyDown(KeyCode.Alpha1)) {
-            handleObj = 1;
+            handleObj = 0;
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha2)) {
-            handleObj = 2;
+            handleObj = 1;
         }
 
         OnInput();
@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
     }
 
     void OnCutting() {
-        if(handleObj == 1) {
+        if(handleObj == 0) {
             if(Input.GetMouseButtonDown(0)) {
                 _isCutting = true;
                 speed = 0;
@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
     }
 
     void OnDigging() {
-        if(handleObj == 2) {
+        if(handleObj == 1) {
             if(Input.GetMouseButtonDown(0)) {
                 _isDigging = true;
                 speed = 0;
